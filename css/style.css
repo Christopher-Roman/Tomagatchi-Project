@@ -1,0 +1,19 @@
+body {
+	display: flex;
+	background-color: black;
+}
+
+.container1 {
+	display: flex-box;
+	justify-content: center;
+}
+
+
+.namePet {
+	color: white;
+}
+
+.background {
+	margin-left: 7%;
+	margin-top: 10%;
+}
