@@ -1,6 +1,10 @@
 body {
 	display: flex;
 	background-color: black;
+	background-image: url('img/Background.jpg');
+	background-repeat: no-repeat;
+	background-clip: border-box;
+	
 }
 
 .container1 {
@@ -14,6 +18,4 @@ body {
 }
 
 .background {
-	margin-left: 7%;
-	margin-top: 10%;
 }

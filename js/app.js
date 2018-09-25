@@ -66,6 +66,7 @@ const game = {
 	generatePet() {
 		const pet = new Venom();
 		this.currentPet = pet;
+		timer()
 	},
 	boredIncrease() {
 		this.currentPet.boredom += 1;
@@ -78,15 +79,23 @@ const game = {
 	},
 	ageIncrease() {
 		this.currentPet.age += 1;
+	},
+	stopTimer() {
+		if(this.currentPet.die())
+			clearInterval()
 	}
 }
+
+setInterval(function (){
+	game.boredIncrease();
+	game.sleepinessIncrease();
+	game.hungerIncrease();
+	console.log(game.currentPet);
+	}, 10000)
 game.generatePet();
-console.log(game.currentPet);
-game.boredIncrease();
-game.hungerIncrease();
-game.sleepinessIncrease();
-game.ageIncrease()
-console.log(game.currentPet);
+// game.timer();
+game.stopTimer();
+
 
 
 
