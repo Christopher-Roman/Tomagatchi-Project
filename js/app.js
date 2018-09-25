@@ -64,16 +64,29 @@ class Venom {
 const game = {
 	currentPet: null,
 	generatePet() {
-		const pet = new Venom()
+		const pet = new Venom();
 		this.currentPet = pet;
-		console.log(this.currentPet);
+	},
+	boredIncrease() {
+		this.currentPet.boredom += 1;
+	},
+	hungerIncrease() {
+		this.currentPet.hunger += 1;
+	},
+	sleepinessIncrease() {
+		this.currentPet.sleepiness += 1;
+	},
+	ageIncrease() {
+		this.currentPet.age += 1;
 	}
-	// boredIncrease() {
-
-	// }
 }
-
-game.generatePet()
+game.generatePet();
+console.log(game.currentPet);
+game.boredIncrease();
+game.hungerIncrease();
+game.sleepinessIncrease();
+game.ageIncrease()
+console.log(game.currentPet);
 
 
 
