@@ -46,10 +46,19 @@ class Venom {
 		this.boredom = 1
 	}
 	morph() {
-		if(this.age >= 2){
-			$petAliveImage.remove()
-			$('.petImage').append($morphImage)
+		if(this.age === 2){
+			$petAliveImage.remove();
+			$('.petMorph').append($morphImage)
 		}
+		if(this.age === 4){
+			$('.petMorph').remove();
+			$('.petTrans').append($transformation)
+		}
+	}
+	eat() {
+		$petAliveImage.remove()
+		$('.petImage').remove()
+		$('.pet')
 	}
 	layEgg() {
 		if(this.age === 10) {
@@ -85,8 +94,8 @@ const game = {
 			console.log(game.currentPet);
 			$('.time').text(game.timeSpan);
 			game.tSpan()
-			game.dies()	
 			pet.morph()	
+			game.dies()	
 		}, 100)
 	},
 	// Dies method will stop the timer if any of the currentPet's stats reach 10.
@@ -137,7 +146,6 @@ const game = {
 	// called. It is attached to a button that will call it whenever it is clicked.
 	feedCurrentPet() {
 		this.currentPet.hunger -= 2;
-		this.feedFadeOut()
 	},
 	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
 	// still need to animate this.
@@ -151,14 +159,14 @@ const game = {
 		this.currentPet.boredom -= 1;
 	},
 	deadPetImage() {
-		$('.morphImage').hide()
+		$('.petWrapper').hide()
 		$('.petImage').append($petDeadImage)
 	},
 	deadFadeOut() {
 		$petDeadImage.velocity("fadeOut", { 
 			duration: 1000
 		})
-	}
+	},
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
 // hunger
@@ -189,22 +197,28 @@ $('.play').on('click',(e) => {
 $('.start').on('click',(e) => {
 	if(game.currentPet === null){
 		(game.generatePet())
-		$('.petImage').append($petAliveImage)
+		$('.petAlive').append($petAliveImage)
 	}
 	console.log('click worked');
 });
 const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venom-crawl.gif">')
 $petAliveImage.attr('class', 'aliveImage')
+
 const $petDeadImage = $('<img src="https://www.fightersgeneration.com/characters/venomhit.gif">')
 $petDeadImage.attr('class', 'deadImage')
+
 const $petEatImage = $('<img src="https://www.fightersgeneration.com/characters/venom-sp.gif">')
 $petEatImage.attr('class', 'eatImage')
+
 const $petPlayImage = $('<img src="css/img/venom34.PNG">')
 $petPlayImage.attr('class', 'playImage')
+
 const $morphImage = $('<img src="https://www.fightersgeneration.com/characters/venomwalk.gif">')
 $morphImage.attr('class', 'morphImage')
 
+const $transformation = $('<img src="https://www.fightersgeneration.com/characters/venom-hkrepeat.gif">')
+$transformation.attr('class', 'transformation')
 
-
-
+const $transition = $('<img src="https://www.fightersgeneration.com/characters/venom-low.gif">')
+$transition.attr('class', 'transformation')
 
