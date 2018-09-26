@@ -56,16 +56,22 @@ class Venom {
 const game = {
 	currentPet: null,
 	timer: null,
+	timeSpan: 1,
 	generatePet() {
 		const pet = new Venom();
 		this.currentPet = pet;
 		this.timer = setInterval(function (){
 			game.boredIncrease();
-
+			$('.boreds').text(game.currentPet.boredom)
 			game.sleepinessIncrease();
+			$('.sleeps').text(game.currentPet.sleepiness)
 			game.hungerIncrease();
+			$('.hungers').text(game.currentPet.hunger)
+			game.ageIncrease();
 			console.log(game.currentPet);
-		}, 1000)
+			game.tSpan()
+			game.dies()		
+		}, 5000)
 	},
 	dies() {
 		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
@@ -74,46 +80,61 @@ const game = {
 		};
 	},
 	boredIncrease() {
-		this.currentPet.boredom += 1;
+		if(this.timeSpan % 3 === 0) {
+			this.currentPet.boredom += 1;
+		}
 	},
 	hungerIncrease() {
-		this.currentPet.hunger += 1;
+		if(this.timeSpan % 2 === 0) {
+			this.currentPet.hunger += 1;
+		}
 	},
 	sleepinessIncrease() {
-		this.currentPet.sleepiness += 1;
+		if(this.timeSpan % 4 === 0) {
+			this.currentPet.sleepiness += 1;
+		}
 	},
 	ageIncrease() {
-		this.currentPet.age += 1;
+		if(this.timeSpan % 5 === 0){
+			this.currentPet.age += 1;
+		}
 	},
 	stopTimer() {
-			clearInterval(this.timer)
+			clearInterval(this.timer);
+	},
+	tSpan() {
+		this.timeSpan += 1;
 	},
 	feedCurrentPet() {
 		this.currentPet.hunger -= 2;
 	},
 	sleep() {
-		this.currentPet.sleepiness = 0
+		this.currentPet.sleepiness = 0;
 	},
 	playWithCurrentPet() {
-		this.currentPet.boredom -= 2
+		this.currentPet.boredom -= 1;
 	}
 
 }
+// game.dies()
 // game.generatePet();
 // game.timer();
 
 $('.feed').on('click',(e) => {
 	(game.feedCurrentPet())
+	$('.hungers').text(game.currentPet.hunger)
 	console.log('click worked');
 });
 
 $('.rest').on('click',(e) => {
 	(game.sleep())
+	$('.sleeps').text(game.currentPet.sleepiness)
 	console.log('click worked');
 });
 
 $('.play').on('click',(e) => {
 	(game.playWithCurrentPet())
+	$('.boreds').text(game.currentPet.boredom)
 	console.log('click worked');
 });
 
