@@ -46,8 +46,9 @@ class Venom {
 		this.boredom = 1
 	}
 	morph() {
-		if(this.age === 5){
-			$('body').append($('<h1>Your Pet is Evolving!</h1>')).css('text-color', 'white')
+		if(this.age >= 2){
+			$petAliveImage.remove()
+			$('.petImage').append($morphImage)
 		}
 	}
 	layEgg() {
@@ -84,14 +85,15 @@ const game = {
 			console.log(game.currentPet);
 			$('.time').text(game.timeSpan);
 			game.tSpan()
-			game.dies()		
+			game.dies()	
+			pet.morph()	
 		}, 100)
 	},
 	// Dies method will stop the timer if any of the currentPet's stats reach 10.
 	dies() {
 		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
 			this.stopTimer()
-			this.changePetImage()
+			this.deadPetImage()
 			console.log('activated');
 		};
 	},
@@ -143,12 +145,16 @@ const game = {
 	// playWithCurrentPet will reduce the currentPet's boredom by 1 every time it is
 	// called. It is attached to a button that will call it whenever it is clicked.
 	playWithCurrentPet() {
+		// this.petPlays()
 		this.currentPet.boredom -= 1;
 	},
-	changePetImage() {
-		$petAliveImage.remove()
+	deadPetImage() {
+		$('.morphImage').hide()
 		$('.petImage').append($petDeadImage)
 	}
+	// petMorph() {
+	// 	$petAliveImage.hide();
+	// }
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
 // hunger
@@ -187,8 +193,12 @@ const $petAliveImage = $('<img src="css/img/venom01.PNG">')
 $petAliveImage.attr('class', 'aliveImage')
 const $petDeadImage = $('<img src="css/img/venom53.PNG">')
 $petDeadImage.attr('class', 'deadImage')
-
-
+const $petEatImage = $('<img src="css/img/venom57.PNG">')
+$petEatImage.attr('class', 'eatImage')
+const $petPlayImage = $('<img src="css/img/venom34.PNG">')
+$petPlayImage.attr('class', 'playImage')
+const $morphImage = $('<img src="css/img/venom60.PNG">')
+$morphImage.attr('class', 'morphImage')
 
 
 
