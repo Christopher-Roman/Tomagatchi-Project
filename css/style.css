@@ -7,9 +7,12 @@ body {
 }
 
 .background {
+	display: flex;
+	align-items: flex-end;
 	background-image: url('img/Background.jpg');
-	width: 900px;
-	height: 500px;
+	width: 1000px;
+	height: 600px;
+	background-repeat: no-repeat;
 }
 
 .stat-points {
@@ -81,5 +84,14 @@ span {
 	color: white;
 }
 
+img {
+	width: 75px;
+	height: 125px;
+	align-content: center;
+}
 
+.deadImage {
+	width: 160px;
+	height: 125px;
+}
 

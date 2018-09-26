@@ -85,12 +85,13 @@ const game = {
 			$('.time').text(game.timeSpan);
 			game.tSpan()
 			game.dies()		
-		}, 1000)
+		}, 100)
 	},
 	// Dies method will stop the timer if any of the currentPet's stats reach 10.
 	dies() {
 		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
 			this.stopTimer()
+			this.changePetImage()
 			console.log('activated');
 		};
 	},
@@ -143,6 +144,10 @@ const game = {
 	// called. It is attached to a button that will call it whenever it is clicked.
 	playWithCurrentPet() {
 		this.currentPet.boredom -= 1;
+	},
+	changePetImage() {
+		$petAliveImage.remove()
+		$('.petImage').append($petDeadImage)
 	}
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
@@ -170,11 +175,22 @@ $('.play').on('click',(e) => {
 });
 
 // This event listener calls the generatePet method to instantiate a pet and start
-// the interval. I need to find a way to make this only clickable if there is not a pet
-// current attempts have proven unsuccessful
+// the interval.
 $('.start').on('click',(e) => {
 	if(game.currentPet === null){
 		(game.generatePet())
+		$('.petImage').append($petAliveImage)
 	}
 	console.log('click worked');
 });
+const $petAliveImage = $('<img src="css/img/venom01.PNG">')
+$petAliveImage.attr('class', 'aliveImage')
+const $petDeadImage = $('<img src="css/img/venom53.PNG">')
+$petDeadImage.attr('class', 'deadImage')
+
+
+
+
+
+
+
