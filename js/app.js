@@ -32,7 +32,11 @@
 		// This will need a click listener
 	// A button put the pet to bed that will decrease sleepiness
 		// This will need a click listener
-
+/*************************************************************************************
+This is the class that builds the Tamogatchi. The methods within it run based on the 
+the age of the pet. When the class instantiates a new Tomagatchi, it will receive base
+stats of age, hunger, sleepiness, and boredom.
+*************************************************************************************/
 class Venom {
 	constructor() {
 		this.name = '';
@@ -53,9 +57,17 @@ class Venom {
 	}
 }
 
+/*************************************************************************************
+This is the game object. Within the game object there are several methods that increase
+stats based on specific intervals. The game object houses the current pet, a timer that 
+all of the methods run off of and a time span that displays how long the Tomagatchi has
+been alive.
+*************************************************************************************/
+
 const game = {
 	currentPet: null,
 	timer: null,
+	timeOn: false,
 	timeSpan: 1,
 	generatePet() {
 		const pet = new Venom();
@@ -68,77 +80,101 @@ const game = {
 			game.hungerIncrease();
 			$('.hungers').text(game.currentPet.hunger)
 			game.ageIncrease();
+			$('.age').text(game.currentPet.age)
 			console.log(game.currentPet);
+			$('.time').text(game.timeSpan);
 			game.tSpan()
 			game.dies()		
-		}, 5000)
+		}, 1000)
 	},
+	// Dies method will stop the timer if any of the currentPet's stats reach 10.
 	dies() {
 		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
 			this.stopTimer()
 			console.log('activated');
 		};
 	},
+	// boredIncrease method will increase the currentPet's current boredom by 1 every 
+	// 10 seconds
 	boredIncrease() {
-		if(this.timeSpan % 3 === 0) {
+		if(this.timeSpan % 10 === 0) {
 			this.currentPet.boredom += 1;
 		}
 	},
+	// hungerIncrease method will increase the currentPet's current hunger by 1 every 
+	// 20 seconds
 	hungerIncrease() {
-		if(this.timeSpan % 2 === 0) {
+		if(this.timeSpan % 20 === 0) {
 			this.currentPet.hunger += 1;
 		}
 	},
+	// sleepinessIncrease method will increase the currentPets current sleepiness by 1 
+	// every 25 seconds.
 	sleepinessIncrease() {
-		if(this.timeSpan % 4 === 0) {
+		if(this.timeSpan % 25 === 0) {
 			this.currentPet.sleepiness += 1;
 		}
 	},
+	// ageIncrease method will increase the currentPet's age by 1 every 50 seconds
 	ageIncrease() {
-		if(this.timeSpan % 5 === 0){
+		if(this.timeSpan % 50 === 0){
 			this.currentPet.age += 1;
 		}
 	},
+	// This method feeds into the dies method to stop the intervals
 	stopTimer() {
 			clearInterval(this.timer);
 	},
+	// the tSpan method increases the timeSpan by 1 second every second
 	tSpan() {
 		this.timeSpan += 1;
 	},
+	// feedCurrentPet method will reduce the currentPet's hunger by 2 every time it is
+	// called. It is attached to a button that will call it whenever it is clicked.
 	feedCurrentPet() {
 		this.currentPet.hunger -= 2;
 	},
+	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
+	// still need to animate this.
 	sleep() {
 		this.currentPet.sleepiness = 0;
 	},
+	// playWithCurrentPet will reduce the currentPet's boredom by 1 every time it is
+	// called. It is attached to a button that will call it whenever it is clicked.
 	playWithCurrentPet() {
 		this.currentPet.boredom -= 1;
 	}
-
 }
-// game.dies()
-// game.generatePet();
-// game.timer();
-
+// This event listener calls the feedCurrentPet method to reduce the currentPet's
+// hunger
 $('.feed').on('click',(e) => {
 	(game.feedCurrentPet())
 	$('.hungers').text(game.currentPet.hunger)
 	console.log('click worked');
 });
 
+// This event listener calls the sleep method to reduce the currentPet's sleepiness
+// to 0
 $('.rest').on('click',(e) => {
 	(game.sleep())
 	$('.sleeps').text(game.currentPet.sleepiness)
 	console.log('click worked');
 });
 
+// This event listener calls the playWithCurrentPet method to reduce the currentPet's
+// boredom
 $('.play').on('click',(e) => {
 	(game.playWithCurrentPet())
 	$('.boreds').text(game.currentPet.boredom)
 	console.log('click worked');
 });
 
+// This event listener calls the generatePet method to instantiate a pet and start
+// the interval. I need to find a way to make this only clickable if there is not a pet
+// current attempts have proven unsuccessful
 $('.start').on('click',(e) => {
-	(game.generatePet())
+	if(game.currentPet === null){
+		(game.generatePet())
+	}
 	console.log('click worked');
 });
