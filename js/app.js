@@ -99,7 +99,7 @@ const game = {
 	}
 
 }
-game.generatePet();
+// game.generatePet();
 // game.timer();
 
 $('.feed').on('click',(e) => {
@@ -117,4 +117,7 @@ $('.play').on('click',(e) => {
 	console.log('click worked');
 });
 
-
+$('.start').on('click',(e) => {
+	(game.generatePet())
+	console.log('click worked');
+});
