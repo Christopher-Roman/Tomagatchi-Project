@@ -35,7 +35,7 @@
 
 class Venom {
 	constructor() {
-		this.name = 'Venom';
+		this.name = '';
 		this.age = 1;
 		this.hunger = 1;
 		this.sleepiness = 1;
@@ -51,22 +51,27 @@ class Venom {
 			$('body').append($('<h2>Your Pet Just Laid an Egg!'))
 		}
 	}
-	die() {
-		if(this.hunger === 10 || this.sleepiness === 10 || this.boredom === 10){
-			$('.city').remove()
-			$('body').css('background', 'black')
-			const $itDied = $('<h1>Your Pet Freakin Died bro... it is dead...</h1>')
-			$('body').append($itDied)
-		}
-	}
 }
 
 const game = {
 	currentPet: null,
+	timer: null,
 	generatePet() {
 		const pet = new Venom();
 		this.currentPet = pet;
-		timer()
+		this.timer = setInterval(function (){
+			game.boredIncrease();
+
+			game.sleepinessIncrease();
+			game.hungerIncrease();
+			console.log(game.currentPet);
+		}, 1000)
+	},
+	dies() {
+		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
+			this.stopTimer()
+			console.log('activated');
+		};
 	},
 	boredIncrease() {
 		this.currentPet.boredom += 1;
@@ -81,23 +86,35 @@ const game = {
 		this.currentPet.age += 1;
 	},
 	stopTimer() {
-		if(this.currentPet.die())
-			clearInterval()
+			clearInterval(this.timer)
+	},
+	feedCurrentPet() {
+		this.currentPet.hunger -= 2;
+	},
+	sleep() {
+		this.currentPet.sleepiness = 0
+	},
+	playWithCurrentPet() {
+		this.currentPet.boredom -= 2
 	}
-}
 
-setInterval(function (){
-	game.boredIncrease();
-	game.sleepinessIncrease();
-	game.hungerIncrease();
-	console.log(game.currentPet);
-	}, 10000)
+}
 game.generatePet();
 // game.timer();
-game.stopTimer();
 
+$('.feed').on('click',(e) => {
+	(game.feedCurrentPet())
+	console.log('click worked');
+});
 
+$('.rest').on('click',(e) => {
+	(game.sleep())
+	console.log('click worked');
+});
 
-
+$('.play').on('click',(e) => {
+	(game.playWithCurrentPet())
+	console.log('click worked');
+});
 
 

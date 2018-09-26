@@ -1,21 +1,64 @@
 body {
-	display: flex;
-	background-color: black;
-	background-image: url('img/Background.jpg');
-	background-repeat: no-repeat;
-	background-clip: border-box;
-	
+	background-color: black;	
 }
-
-.container1 {
-	display: flex-box;
-	justify-content: center;
-}
-
 
 .namePet {
 	color: white;
 }
 
 .background {
+	background-image: url('img/Background.jpg');
+	width: 900px;
+	height: 500px;
+}
+
+.stat-points {
+	text-align: right;
+	color: white;
+	margin-right: 20px;
+}
+
+button {
+}
+
+.name {
+	color: white;
+	font-size: 25px;
+}
+
+.container1 {
+	display: flex;
+	justify-content: flex-end;
+	flex-direction: column;
+}
+
+.stats {
+	text-align: right;
+	color: white
+}
+
+.container2 {
+	display: flex;
+	justify-content: center;
+}
+
+.feed {
+	padding-right: 15px;
+	height: 25px;
+	text-align: center;
+	border: solid 5px gray;
+}
+
+.rest {
+	padding-right: 15px;
+	height: 25px;
+	text-align: center;
+	border: solid 5px gray;
+}
+
+.play {
+	padding-right: 15px;
+	height: 25px;
+	text-align: center;
+	border: solid 5px gray;
 }
