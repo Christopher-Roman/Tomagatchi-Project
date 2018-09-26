@@ -8,11 +8,13 @@ body {
 
 .background {
 	display: flex;
+	justify-content: center;
 	align-items: flex-end;
 	background-image: url('img/Background.jpg');
 	width: 1000px;
-	height: 530px;
+	height: 525px;
 	background-repeat: no-repeat;
+	border-bottom: 2px solid grey
 }
 
 .stat-points {
@@ -31,23 +33,26 @@ button {
 
 .container1 {
 	display: flex;
-	justify-content: flex-end;
-	flex-direction: column;
+
 }
 
 .stats {
-	text-align: right;
-	color: white
+	margin-right: 20px;
+	color: black;
+	margin-top: 15px;
+	border: 2px solid red;
+	background-color: rgb(0, 255, 0);
 }
 
 .container2 {
 	display: flex;
 	justify-content: center;
+	margin-top: 10px;
 }
 
 .age {
 	text-align: right;
-	color: white
+	color: black;
 }
 
 .feed {
@@ -55,6 +60,10 @@ button {
 	height: 25px;
 	text-align: center;
 	border: solid 5px gray;
+}
+
+.petImage {
+	align-content: center;
 }
 
 .rest {
@@ -81,25 +90,35 @@ button {
 }
 
 span {
-	color: white;
+	color: black;
+	text-transform: bold;
 }
 
 .aliveImage {
-	width: 35px;
-	height: 70px;
+	width: 150px;
+	height: 80px;
+	align-self: baseline;
 }
 
 .deadImage {
-	width: 115px;
-	height: 70px;
+	width: 200px;
+	height: 255px;
+	align-self: baseline;
 }
 
 .playImage {
 	width: 115px;
 	height: 70px;
+	align-self: baseline;
 }
 
 .morphImage {
-	width: 55px;
-	height: 80px;
+	width: 175px;
+	height: 175px;
+	align-self: baseline;
+}
+
+.wrapper {
+	display: flex;
+	justify-content: space-around;
 }

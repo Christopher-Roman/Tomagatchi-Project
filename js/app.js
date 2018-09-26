@@ -94,6 +94,7 @@ const game = {
 		if(this.currentPet.hunger === 10 || this.currentPet.sleepiness === 10 || this.currentPet.boredom === 10){
 			this.stopTimer()
 			this.deadPetImage()
+			this.deadFadeOut()
 			console.log('activated');
 		};
 	},
@@ -136,6 +137,7 @@ const game = {
 	// called. It is attached to a button that will call it whenever it is clicked.
 	feedCurrentPet() {
 		this.currentPet.hunger -= 2;
+		this.feedFadeOut()
 	},
 	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
 	// still need to animate this.
@@ -151,10 +153,12 @@ const game = {
 	deadPetImage() {
 		$('.morphImage').hide()
 		$('.petImage').append($petDeadImage)
+	},
+	deadFadeOut() {
+		$petDeadImage.velocity("fadeOut", { 
+			duration: 1000
+		})
 	}
-	// petMorph() {
-	// 	$petAliveImage.hide();
-	// }
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
 // hunger
@@ -189,15 +193,15 @@ $('.start').on('click',(e) => {
 	}
 	console.log('click worked');
 });
-const $petAliveImage = $('<img src="css/img/venom01.PNG">')
+const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venom-crawl.gif">')
 $petAliveImage.attr('class', 'aliveImage')
-const $petDeadImage = $('<img src="css/img/venom53.PNG">')
+const $petDeadImage = $('<img src="https://www.fightersgeneration.com/characters/venomhit.gif">')
 $petDeadImage.attr('class', 'deadImage')
-const $petEatImage = $('<img src="css/img/venom57.PNG">')
+const $petEatImage = $('<img src="https://www.fightersgeneration.com/characters/venom-sp.gif">')
 $petEatImage.attr('class', 'eatImage')
 const $petPlayImage = $('<img src="css/img/venom34.PNG">')
 $petPlayImage.attr('class', 'playImage')
-const $morphImage = $('<img src="css/img/venom60.PNG">')
+const $morphImage = $('<img src="https://www.fightersgeneration.com/characters/venomwalk.gif">')
 $morphImage.attr('class', 'morphImage')
 
 
