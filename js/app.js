@@ -79,6 +79,7 @@ const game = {
 	timer: null,
 	timeOn: false,
 	timeSpan: 1,
+	sleep: false,
 	generatePet() {
 		const pet = new Venom();
 		this.currentPet = pet;
@@ -94,9 +95,13 @@ const game = {
 			console.log(game.currentPet);
 			$('.time').text(game.timeSpan);
 			game.tSpan()
-			pet.morph()
 			game.dies()	
-		}, 100)
+		}, 1000)
+	},
+	transform() {
+		if(this.timeSpan % 50 === 0){
+			currentPet.morph()
+		}
 	},
 	// Dies method will stop the timer if any of the currentPet's stats reach 10.
 	dies() {
@@ -159,13 +164,22 @@ const game = {
 	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
 	// still need to animate this.
 	sleep() {
-		this.currentPet.sleepiness = 0;
+		if(this.sleep = false){
+			this.currentPet.sleepiness = 0;
+		}
 	},
 	// playWithCurrentPet will reduce the currentPet's boredom by 1 every time it is
 	// called. It is attached to a button that will call it whenever it is clicked.
 	playWithCurrentPet() {
-		// this.petPlays()
 		this.currentPet.boredom -= 1;
+		$('.petAlive').hide()
+		$('.petPlay').append($petPlayImage).velocity("fadeOut", {
+			duration: 6000
+		})
+		setTimeout(function (){
+			game.fadeInPetPlay()
+			duration: 1000
+		})
 	},
 	deadPetImage() {
 		$('.petWrapper').hide()
