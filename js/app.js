@@ -46,20 +46,26 @@ class Venom {
 		this.boredom = 1
 	}
 	morph() {
-		if(this.age === 2){
-			$petAliveImage.remove();
+		if(this.age === 2) {
+			$('.petAlive').remove();
 			$('.petMorph').append($morphImage)
 		}
-		if(this.age === 4){
+	}
+	morph2() {
+		if(this.age === 5) {
 			$('.petMorph').remove();
 			$('.petTrans').append($transformation)
 		}
 	}
-	eat() {
-		$petAliveImage.remove()
-		$('.petImage').remove()
-		$('.pet')
-	}
+	// eat() {
+	// 	$('.petAlive').hide()
+	// 	$('.petEat').append($petEatImage).velocity("fadeOut", {
+	// 		duration: 1000
+	// 	})
+		// setTimeout(function () {
+		// 	game.fadeInPetAlive()
+		// }, 1000)	
+	// }
 	layEgg() {
 		if(this.age === 10) {
 			$('body').append($('<h2>Your Pet Just Laid an Egg!'))
@@ -95,13 +101,10 @@ const game = {
 			console.log(game.currentPet);
 			$('.time').text(game.timeSpan);
 			game.tSpan()
+			pet.morph()
+			pet.morph2()
 			game.dies()	
 		}, 1000)
-	},
-	transform() {
-		if(this.timeSpan % 50 === 0){
-			currentPet.morph()
-		}
 	},
 	// Dies method will stop the timer if any of the currentPet's stats reach 10.
 	dies() {
@@ -111,6 +114,13 @@ const game = {
 			this.deadFadeOut()
 			console.log('activated');
 		};
+	},
+	sleeping() {
+		if(this.currentPet.sleep === false) {
+			$('.background').css('opacity', '1.0')
+		} else {
+			$('.background').css('opacity', '0.3')
+		}
 	},
 	// boredIncrease method will increase the currentPet's current boredom by 1 every 
 	// 10 seconds
@@ -150,8 +160,9 @@ const game = {
 	// feedCurrentPet method will reduce the currentPet's hunger by 2 every time it is
 	// called. It is attached to a button that will call it whenever it is clicked.
 	feedCurrentPet() {
-		if(this.currentPet.hunger > 0){
+		if(this.currentPet.hunger > 1){
 		this.currentPet.hunger -= 1;
+		if (this.currentPet.age < 2) {
 			$('.petAlive').hide()
 			$('.petEat').append($petEatImage).velocity("fadeOut", {
 				duration: 1000
@@ -159,27 +170,95 @@ const game = {
 			setTimeout(function () {
 				game.fadeInPetAlive()
 			}, 1000)
+
+		} else if(this.currentPet.age > 2 && this.currentPet.age < 5) {
+			$('.petMorph').hide()
+			$('.petEat').append($petEatImage).velocity("fadeOut", {
+				duration: 1500
+				})
+			setTimeout(function (){
+				game.fadeInPetMorph()
+				duration: 2000
+			})
+		} else {
+			$('.petTrans').hide()
+			$('.petEat').append($petEatImage).velocity("fadeOut", {
+				duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetTrans()
+					duration: 2000
+				})				
+			}
 		}
 	},
 	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
 	// still need to animate this.
 	sleep() {
-		if(this.sleep = false){
-			this.currentPet.sleepiness = 0;
-		}
+			this.currentPet.sleepiness = 1;
+			if (this.currentPet.age < 2) {
+				$('.petAlive').hide()
+				$('.sleep').append($petSleep).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetAlive()
+					duration: 2000
+				})
+			} else if(this.currentPet.age > 2 && this.currentPet.age < 5) {
+				$('.petMorph').hide()
+				$('.sleep').append($petSleep).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetMorph()
+					duration: 2000
+					})
+			} else {
+				$('.petTrans').hide()
+				$('.sleep').append($petSleep).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetTrans()
+					duration: 2000
+				})				
+			}
 	},
 	// playWithCurrentPet will reduce the currentPet's boredom by 1 every time it is
 	// called. It is attached to a button that will call it whenever it is clicked.
 	playWithCurrentPet() {
-		this.currentPet.boredom -= 1;
-		$('.petAlive').hide()
-		$('.petPlay').append($petPlayImage).velocity("fadeOut", {
-			duration: 6000
-		})
-		setTimeout(function (){
-			game.fadeInPetPlay()
-			duration: 1000
-		})
+		if(this.currentPet.boredom > 1) {
+			this.currentPet.boredom -= 1;
+			if(this.currentPet.age < 2){	
+				$('.petAlive').hide()
+				$('.petPlay').append($petPlayImage).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetAlive()
+					duration: 2100
+				})
+			} else if(this.currentPet.age > 2 && this.currentPet.age < 5) {
+				$('.petMorph').hide()
+				$('.petPlay').append($petPlayImage).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInPetMorph()
+					duration: 2100
+				})	
+			} else {
+				$('.petTrans').hide()
+				$('.petPlay').append($petPlayImage).velocity("fadeOut", {
+					duration: 1500
+				})
+				setTimeout(function (){
+					game.fadeInTrans()
+					duration: 2100
+				})	
+			}
+		}
 	},
 	deadPetImage() {
 		$('.petWrapper').hide()
@@ -195,10 +274,15 @@ const game = {
 			duration: 1000
 		})
 	},
-	fadeInPetPlay() {
-		$('.morphImage').velocity('fadeIn', {
+	fadeInPetMorph() {
+		$('.petMorph').velocity('fadeIn', {
 			duration: 1000
 		})		
+	},
+	fadeInPetTrans() {
+		$('.petTrans').velocity('fadeIn', {
+			duration: 1000
+		})	
 	}
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
@@ -206,6 +290,7 @@ const game = {
 $('.feed').on('click',(e) => {
 	(game.feedCurrentPet())
 	$('.hungers').text(game.currentPet.hunger)
+	$('.feed').on('click')
 	console.log('click worked');
 });
 
@@ -222,6 +307,7 @@ $('.rest').on('click',(e) => {
 $('.play').on('click',(e) => {
 	(game.playWithCurrentPet())
 	$('.boreds').text(game.currentPet.boredom)
+	// $('.play').on('click')
 	console.log('click worked');
 });
 
@@ -234,7 +320,7 @@ $('.start').on('click',(e) => {
 	}
 	console.log('click worked');
 });
-const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venomcrawling.gif">')
+const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venom-crouchstance.gif">')
 $petAliveImage.attr('class', 'aliveImage')
 
 const $petDeadImage = $('<img src="https://www.fightersgeneration.com/characters/venomhit.gif">')
@@ -243,13 +329,13 @@ $petDeadImage.attr('class', 'deadImage')
 const $petEatImage = $('<img src="https://www.fightersgeneration.com/characters/venom-sp.gif">')
 $petEatImage.attr('class', 'eatImage')
 
-const $morphEat = $('<img src="https://www.fightersgeneration.com/characters/venom-c3.gif">')
+const $morphEat = $('<img src="https://www.fightersgeneration.com/characters/venom-fp.gif">')
 $morphEat.attr('class', 'morphEat')
 
-const $petPlayImage = $('<img src="https://www.fightersgeneration.com/characters/venom-webthrow.gif">')
+const $petPlayImage = $('<img src="https://www.fightersgeneration.com/characters/venom-win1.gif">')
 $petPlayImage.attr('class', 'playImage')
 
-const $morphImage = $('<img src="https://www.fightersgeneration.com/characters/venomwalk.gif">')
+const $morphImage = $('<img src="https://www.fightersgeneration.com/characters/m-venom.gif">')
 $morphImage.attr('class', 'morphImage')
 
 const $transformation = $('<img src="https://www.fightersgeneration.com/characters/venom-hkrepeat.gif">')
@@ -258,3 +344,4 @@ $transformation.attr('class', 'transformation')
 const $transition = $('<img src="https://www.fightersgeneration.com/characters/venom-low.gif">')
 $transition.attr('class', 'transformation')
 
+const $petSleep = $('<img src="https://www.fightersgeneration.com/characters/venom-special1.gif">')

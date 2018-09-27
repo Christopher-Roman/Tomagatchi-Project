@@ -4,6 +4,7 @@ body {
 
 .namePet {
 	color: white;
+	font-family: 'Creepster', cursive;
 }
 
 .background {
@@ -24,11 +25,15 @@ body {
 }
 
 button {
+	font-family: 'Creepster', cursive;
+	font-size: 15px;
+	background-color: 
 }
 
 .name {
 	color: white;
 	font-size: 25px;
+	font-family: 'Creepster', cursive;
 }
 
 .container1 {
@@ -42,6 +47,7 @@ button {
 	margin-top: 15px;
 	border: 2px solid red;
 	background-color: rgb(0, 255, 0);
+	font-family: 'Creepster';
 }
 
 .container2 {
@@ -53,13 +59,17 @@ button {
 .age {
 	text-align: right;
 	color: black;
+	font-family: 'Creepster';font-family:
 }
 
 .feed {
 	padding-right: 15px;
 	height: 25px;
 	text-align: center;
-	border: solid 5px gray;
+	background-color: rgb(0,255,0);
+	border: solid 2px red;
+	font-family: 'Creepster', cursive;
+
 }
 
 .petImage {
@@ -70,23 +80,29 @@ button {
 	padding-right: 15px;
 	height: 25px;
 	text-align: center;
-	border: solid 5px gray;
+	background-color: rgb(0,255,0);
+	border: solid 2px red;
+	font-family: 'Creepster', cursive;
 }
 
 .play {
 	padding-right: 15px;
 	height: 25px;
 	text-align: center;
-	border: solid 5px gray;
+	background-color: rgb(0,255,0);
+	border: solid 2px red;
+	font-family: 'Creepster', cursive;
 }
 
 .timer {
 	display: flex;
+	font-family: 'Creepster';
 }
 
 .time {
 	font-size: 25px;
 	color: white;
+	font-family: 'Creepster';
 }
 
 span {
