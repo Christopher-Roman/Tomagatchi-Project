@@ -254,7 +254,7 @@ const game = {
 					duration: 1500
 				})
 				setTimeout(function (){
-					game.fadeInTrans()
+					game.fadeInPetTrans()
 					duration: 2100
 				})	
 			}
