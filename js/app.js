@@ -94,7 +94,7 @@ const game = {
 			console.log(game.currentPet);
 			$('.time').text(game.timeSpan);
 			game.tSpan()
-			pet.morph()	
+			pet.morph()
 			game.dies()	
 		}, 100)
 	},
@@ -145,7 +145,16 @@ const game = {
 	// feedCurrentPet method will reduce the currentPet's hunger by 2 every time it is
 	// called. It is attached to a button that will call it whenever it is clicked.
 	feedCurrentPet() {
-		this.currentPet.hunger -= 2;
+		if(this.currentPet.hunger > 0){
+		this.currentPet.hunger -= 1;
+			$('.petAlive').hide()
+			$('.petEat').append($petEatImage).velocity("fadeOut", {
+				duration: 1000
+			})
+			setTimeout(function () {
+				game.fadeInPetAlive()
+			}, 1000)
+		}
 	},
 	// sleep method will reduce the currentPet's sleepiness to zero whenever it is called
 	// still need to animate this.
@@ -167,6 +176,16 @@ const game = {
 			duration: 1000
 		})
 	},
+	fadeInPetAlive() {
+		$('.petAlive').velocity('fadeIn', {
+			duration: 1000
+		})
+	},
+	fadeInPetPlay() {
+		$('.morphImage').velocity('fadeIn', {
+			duration: 1000
+		})		
+	}
 }
 // This event listener calls the feedCurrentPet method to reduce the currentPet's
 // hunger
@@ -201,7 +220,7 @@ $('.start').on('click',(e) => {
 	}
 	console.log('click worked');
 });
-const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venom-crawl.gif">')
+const $petAliveImage = $('<img src="https://www.fightersgeneration.com/characters/venomcrawling.gif">')
 $petAliveImage.attr('class', 'aliveImage')
 
 const $petDeadImage = $('<img src="https://www.fightersgeneration.com/characters/venomhit.gif">')
@@ -210,7 +229,10 @@ $petDeadImage.attr('class', 'deadImage')
 const $petEatImage = $('<img src="https://www.fightersgeneration.com/characters/venom-sp.gif">')
 $petEatImage.attr('class', 'eatImage')
 
-const $petPlayImage = $('<img src="css/img/venom34.PNG">')
+const $morphEat = $('<img src="https://www.fightersgeneration.com/characters/venom-c3.gif">')
+$morphEat.attr('class', 'morphEat')
+
+const $petPlayImage = $('<img src="https://www.fightersgeneration.com/characters/venom-webthrow.gif">')
 $petPlayImage.attr('class', 'playImage')
 
 const $morphImage = $('<img src="https://www.fightersgeneration.com/characters/venomwalk.gif">')
